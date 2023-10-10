@@ -18,7 +18,7 @@ div {
     margin-bottom: 5%;
     width: 25%;
     height: 5px;
-    background-color: rgb(23, 92, 39)
+    background-color: rgba(250, 143, 13, 0.678)
 }
 .photo {
     margin-top: 5vh;

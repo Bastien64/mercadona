@@ -1,7 +1,7 @@
 <template>
     <div class="card-body">
-        <h3>Bienvenue au MERCADONA</h3>
-        <p>Vous trouverez ici toutes les promotions du magasins. </p>
+        <h3>Galerie Photos</h3>
+        <p>Le concours s'adresse à tous les passionnés de photographie, amateurs ou professionnels. À la fin du concours,  le photographe avec la photo qui accumule plus grand nombre de vote se verra décerner un prix </p>
     </div>
 </template>
 
@@ -17,7 +17,7 @@ div:hover {
     transition: 0.5s;   
     width: 60%;
     height: auto;
-    box-shadow:  rgb(23, 92, 39) 0.5px 5px 5px, #175c27a9 10px 10px, #175c2762 15px 15px
+    box-shadow:  hsla(33, 96%, 52%, 0.4) 0.5px 5px 5px, rgba(250, 143, 13, 0.3) 10px 10px,  rgba(250, 143, 13, 0.2) 15px 15px,  rgba(250, 143, 13, 0.1) 20px 20px,  rgba(250, 143, 13, 0.05) 25px 25px;
 }
 
 h3{
