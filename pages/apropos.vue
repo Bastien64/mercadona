@@ -1,15 +1,11 @@
 <template>
-    <div class="box"> <h1>A propos</h1>
-    <p>La participation à un concours photo peut être une expérience enrichissante pour les photographes débutants comme pour les professionnels. C'est une occasion de mettre en valeur son talent et de se confronter à d'autres artistes.</p>
+    <div class="box"> <h1>About us</h1>
+    <p>Mercadona, a family company, is one of the leading physical supermarket and online shopping companies in Spain. Its goal is to be responsible for prescribing “The Boss” (customer) the best option to satisfy its food, home care, personal care and animal care. Thanks to this, 5.7 million households place their trust in the company every day. </p>
     <div class="effet"></div>
-    <p>Les concours photo peuvent avoir des thèmes très variés, ce qui permet aux participants de choisir un sujet qui les inspire et de créer des images qui reflètent leur vision artistique. Certains concours ont des critères très spécifiques pour la participation, tels que des exigences techniques ou des limites de temps, tandis que d'autres peuvent être plus ouverts et offrir une plus grande liberté aux participants.</p>
+    <p>Created in 1977 by the Cárnicas Roig Group, currently it has 1.627 stores across Spain and 42 in Portugal, and a staff of 99.000 employees who seek excellence, 3.500 of them in Portugal.</p>
     <div class="effet"></div>
-    <p>Participer à un concours photo peut également offrir une chance de se faire remarquer par des professionnels de l'industrie ou de gagner des prix et des récompenses qui peuvent aider à financer de futurs projets photographiques. De plus, le fait de participer à des concours peut être une excellente occasion de rencontrer d'autres photographes passionnés et de faire partie d'une communauté artistique.</p>
+    <p>“Achieving a Sustainable Agri-Food Chain, which people want to exist and feel proud of, led by Mercadona, and with ‘The Boss’ as its lighthouse”.</p>
     <div class="effet"></div>
-    <p>Cependant, il est important de se rappeler que la participation à un concours photo n'est pas une garantie de succès et que les critères de sélection peuvent être très compétitifs. Il est donc important de prendre le temps de bien comprendre les règles du concours, de choisir soigneusement ses photos, de s'assurer qu'elles répondent aux critères de sélection et de présenter son travail de manière professionnelle.</p>
-    <div class="effet"></div>
-    <p>En résumé, participer à un concours photo peut être une expérience passionnante et gratifiante pour les photographes de tous niveaux d'expérience. C'est une occasion de se confronter à d'autres artistes, de se faire remarquer par des professionnels de l'industrie et de faire partie d'une communauté artistique. Cependant, il est important de prendre le temps de bien comprendre les règles du concours et de présenter son travail de manière professionnelle pour maximiser ses chances de réussite.</p>
-    <button class="btn btn-danger" href="https://www.studioimagein.com/contact/"> Nous contacter</button>
 </div>
 </template>
 

@@ -2,7 +2,7 @@
     <div class="card" >
         <div class="card-body">
             <h1> Bienvenue sur l'interface administrateur </h1>
-            <p>Vous pouvez  : ajouter des photos, voir les votes et télécharger la base de données des Votants</p>
+            <p>Vous pouvez  : Ajouter des produits ainsi que des promotions</p>
             <button class="btn btn-danger" @click="logout">Logout</button>
         </div>
     </div>
@@ -11,7 +11,6 @@
 </template>
   
 <script>
-import axios from 'axios';
 export default {
     beforeMount() {
         const isAdmin = localStorage.getItem("Admin") === "Admin";
@@ -76,7 +75,7 @@ export default {
     margin-right: auto;
     width: 45%;
     height: 5px;
-    background-color: #fa8f0dad
+    background-color: #1c8d00ad
 }
 }
 
