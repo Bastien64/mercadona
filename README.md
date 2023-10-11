@@ -10,6 +10,10 @@ L'administrateur peut se connecter sur :
 
  L'administateur peut ajouter des produits, ainsi que des promotions sur chaque produit.
 
+## API
+
+L'application fait appel à une API Flask https://bastien-353a308d211c.herokuapp.com/ répondant aux demandent /produit /promotion /admin /categorie. Mise en ligne sur Heroku
+
 
 # MISE EN PLACE DE NUXT EN LOCAL
 
