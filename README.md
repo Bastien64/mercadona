@@ -14,6 +14,9 @@ L'administrateur peut se connecter sur :
 
 L'application fait appel à une API Flask https://bastien-353a308d211c.herokuapp.com/ répondant aux demandent /produit /promotion /admin /categorie. Mise en ligne sur Heroku
 
+##BDD 
+
+La base de donnée est une base PostGreSQL mise en place sur serveur OVH, système UBUNTU.
 
 # MISE EN PLACE DE NUXT EN LOCAL
 
