@@ -11,9 +11,7 @@ L'administrateur peut se connecter sur :
  L'administateur peut ajouter des produits, ainsi que des promotions sur chaque produit.
 
 
-# Nuxt 3 Minimal Starter
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# MISE EN PLACE DE NUXT EN LOCAL
 
 ## Setup
 
