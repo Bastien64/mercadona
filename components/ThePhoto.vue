@@ -6,7 +6,7 @@
     <div v-else class="categorie">
       <div style="display: flex; flex-direction: row;">
         <div v-for="categorie in categories" :key="categorie.id" class="col-md-3 mb-3 ">
-          <button type="button" class="btn btn-success" @click="filterByCategory(categorie.id)">{{ categorie.libelle
+          <button style="margin-left: 5px;" type="button" class="btn btn-success" @click="filterByCategory(categorie.id)">{{ categorie.libelle
           }}</button>
         </div>
       </div>
