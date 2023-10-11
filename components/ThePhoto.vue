@@ -3,22 +3,26 @@
     <div v-if="loading" class="loading-animation" style="display: flex; flex-direction: column;">
       <p style="font-weight: bold;">En chargement ...</p>
     </div>
-    <div v-else class="row">
-      <div v-for="categorie in categories" :key="categorie.id" class="col-md-3 mb-3">
-        <button type="button" class="btn btn-success" @click="filterByCategory(categorie.id)">{{ categorie.libelle
-        }}</button>
+    <div v-else class="categorie">
+      <div style="display: flex; flex-direction: row;">
+        <div v-for="categorie in categories" :key="categorie.id" class="col-md-3 mb-3 ">
+          <button type="button" class="btn btn-success" @click="filterByCategory(categorie.id)">{{ categorie.libelle
+          }}</button>
+        </div>
       </div>
-      <div v-for="produit in filteredProduits" :key="produit.id" class="col-md-4 mb-2">
-        <div class="card h-100 w-75 align-items-center justify-content-center">
-          <img :src="produit.image" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{ produit.description }}</h5>
-            <p :class="{ 'discounted-price-style': hasDiscount(produit.id) }">
-              {{ getProductPrice(produit.id) }} €
-            </p>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div v-for="produit in filteredProduits" :key="produit.id" class="col-md-4 mb-2">
+          <div class="card h-100 w-75 align-items-center justify-content-center">
+            <img :src="produit.image" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ produit.description }}</h5>
+              <p :class="{ 'discounted-price-style': hasDiscount(produit.id) }">
+                {{ getProductPrice(produit.id) }} €
+              </p>
 
 
-            <p class="badge bg-success">{{ getCategoryLabel(produit.categorie_id) }}</p>
+              <p class="badge bg-success">{{ getCategoryLabel(produit.categorie_id) }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -144,6 +148,7 @@ export default {
     color: red;
     font-size: 25px;
   }
+
 }
 
 
@@ -158,8 +163,8 @@ export default {
 
   img {
     float: left;
-    width: 300px;
-    height: 300px;
+    width: 50%;
+    height: auto;
     object-fit: cover;
   }
 
@@ -167,6 +172,11 @@ export default {
     font-weight: bold;
     color: red;
     font-size: 25px;
+  }
+
+  .categorie {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
