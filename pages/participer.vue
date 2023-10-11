@@ -1,12 +1,5 @@
 <template>
-    <div class="box"> <h1>Participer</h1>
-    <p>Nous sommes ravis d'annoncer notre prochain concours photo, qui offrira aux participants la chance de remporter des prix fantastiques ! Pour participer, vous devez tout d'abord vous rendre dans notre studio photo, où vous pourrez prendre une photo sur le thème du concours.</p>
-    <div class="effet"></div>
-    <p>Ensuite, nous téléchargerons sur notre site web dédié au concours et remplir le formulaire de participation. Assurez-vous de fournir toutes les informations requises, y compris votre nom, votre adresse email et votre numéro de téléphone lors de vôtre visite au studio.</p>
-    <div class="effet"></div>
-    <p>Les soumissions doivent être reçues avant la date limite du concours, et les gagnants seront annoncés peu de temps après. Alors n'hésitez plus, venez nous voir au studio photo et montrez-nous votre talent pour la photographie ! Nous sommes impatients !</p>
-
-    <button class="btn btn-danger" href="https://www.studioimagein.com/contact/"> Nous contacter</button>
+    <div class="box"> 
 </div>
 </template>
 
