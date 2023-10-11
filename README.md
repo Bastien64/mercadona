@@ -1,10 +1,11 @@
 # APPLICATION MERCADONA 
 
+## TUTO
 Lien de l'application : https://mercadona-studi.netlify.app 
 Le client peut voir les produits et promotion sur la page principale
 L'administrateur peut se connecter sur : 
 
- https://mercadona-studi.netlify.app/protected
+ https://mercadona-studi.netlify.app/protected  
  Login : Admin
  MDP : studi2023
 
