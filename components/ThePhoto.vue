@@ -4,10 +4,15 @@
       <p style="font-weight: bold;">En chargement ...</p>
     </div>
     <div v-else class="categorie">
+      <button type="button" class="btn btn-primary" @click="showAllProducts">Tous les produits</button>
       <div style="display: flex; flex-direction: row;">
+
         <div v-for="categorie in categories" :key="categorie.id" class="col-md-3 mb-3 ">
-          <button style="margin-left: 5px;" type="button" class="btn btn-success" @click="filterByCategory(categorie.id)">{{ categorie.libelle
-          }}</button>
+          
+          <button style="margin-left: 5px;" type="button" class="btn btn-success"
+            @click="filterByCategory(categorie.id)">{{ categorie.libelle
+            }}</button>
+
         </div>
       </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -15,10 +20,19 @@
           <div class="card h-100 w-75 align-items-center justify-content-center">
             <img :src="produit.image" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{ produit.description }}</h5>
-              <p :class="{ 'discounted-price-style': hasDiscount(produit.id) }">
-                {{ getProductPrice(produit.id) }} €
+              <h5 class="card-title fs-3">{{ produit.description }}</h5>
+              <p>
+                <span v-if="isPromotionActive(produit.id)" class="old-price-style">
+  <span class="fs-5">{{ produit.price }} €</span><br>
+  ({{ getDiscountPercentage(produit.id) }}% de réduction)<br>
+  Promotion du {{ getPromotionStartDate(produit.id) }} au {{ getPromotionEndDate(produit.id) }}<br>
+  <span class="discounted-price-style">{{getProductPrice(produit.id) }} €</span>
+</span> <p v-else>{{ produit.price }} € </p>
+
+
+
               </p>
+
 
 
               <p class="badge bg-success">{{ getCategoryLabel(produit.categorie_id) }}</p>
@@ -45,6 +59,14 @@ export default {
     }
   },
   computed: {
+    showAllProducts() {
+      if (this.selectedCategoryId != null) {
+        this.selectedCategoryId = null;
+      } else {
+        this.selectedCategoryId = null;
+      }
+
+  },
     filteredProduits() {
       if (this.selectedCategoryId === null) {
         return this.produits;
@@ -54,6 +76,30 @@ export default {
     }
   },
   methods: {
+    isPromotionActive(produitId) {
+    const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+    if (promotion) {
+      const currentDate = new Date();
+      const startDate = new Date(promotion.datedebut);
+      const endDate = new Date(promotion.datefin);
+
+      return currentDate >= startDate && currentDate <= endDate;
+    }
+
+    return false;
+  },
+    getPromotionStartDate(produitId) {
+    const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+    return promotion ? promotion.datedebut : '';
+  },
+  getPromotionEndDate(produitId) {
+    const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+    return promotion ? promotion.datefin : '';
+  },
+    getDiscountPercentage(produitId) {
+    const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+    return promotion ? promotion.pourcentage : 0;
+  },
     hasDiscount(produitId) {
       const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
       return promotion !== undefined;
@@ -171,7 +217,6 @@ export default {
   .discounted-price-style {
     font-weight: bold;
     color: red;
-    font-size: 25px;
   }
 
   .categorie {

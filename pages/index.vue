@@ -2,6 +2,7 @@
     <div class="text"><TheTextgalerie /></div>
     <div class="effet"></div>
     <div class="photo"><ThePhoto /></div>
+    
     <div class="cookies"><TheCookies /></div>
     <div class="effet"></div>
       
