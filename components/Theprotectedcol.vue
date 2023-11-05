@@ -63,7 +63,7 @@
                     <input type="number" class="form-control" v-model="newProduit.price" required>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image (base64)</label>
+                    <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control-file" @change="handleFileChange" accept="image/*">
                     <img :src="selectedImage" v-if="selectedImage" alt="Aperçu de l'image" class="mt-2 img-thumbnail"
                         style="max-width: 200px;">
@@ -111,48 +111,26 @@ export default {
     },
     methods: {
         isFuturePromotion(produitId) {
-    const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
-    if (promotion) {
-      const currentDate = new Date();
-      const startDate = new Date(promotion.datedebut);
-      return currentDate < startDate;
-    }
-    return false;
-  },
+            return this.getPromotionStatus(produitId, 'future');
+        },
         isPromotionActive(produitId) {
-            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
-            if (promotion) {
-                const currentDate = new Date();
-                const startDate = new Date(promotion.datedebut);
-                const endDate = new Date(promotion.datefin);
-                return currentDate >= startDate && currentDate <= endDate;
-            }
-            return false;
+            return this.getPromotionStatus(produitId, 'active');
         },
         getPromotionStartDate(produitId) {
-            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
-            if (promotion) {
-                return promotion.datedebut;
-            }
-            return 'Pas de promotion';
+            return this.getPromotionDate(produitId, 'datedebut');
         },
-
         getPromotionEndDate(produitId) {
-            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
-            if (promotion) {
-                return promotion.datefin;
-            }
-            return 'Pas de promotion';
+            return this.getPromotionDate(produitId, 'datefin');
         },
         hasDiscount(produitId) {
-            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
-            return promotion !== undefined;
+            return this.promotions.some(promotion => promotion.produit_id === produitId);
         },
         getProductPrice(produitId) {
             const produit = this.produits.find(produit => produit.id === produitId);
             if (!produit) {
                 return 0;
             }
+
             const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
             if (promotion) {
                 const discountPercentage = promotion.pourcentage / 100;
@@ -163,14 +141,13 @@ export default {
             }
         },
         openPromotionModal(produit) {
-            // Initialisez les champs du formulaire de promotion
-            this.selectedProductForPromotion = produit.id; // Assurez-vous que vous avez un identifiant unique pour chaque produit
+            this.selectedProductForPromotion = produit.id;
             this.promotionFormData = {
                 datedebut: '',
                 datefin: '',
                 pourcentage: '',
             };
-            this.isPromotionModalOpen = true; // Activez la fenêtre modale de promotion
+            this.isPromotionModalOpen = true;
         },
         addPromotion() {
             const promotionData = {
@@ -182,13 +159,9 @@ export default {
 
             axios.post('https://bastien-353a308d211c.herokuapp.com/promotion', promotionData)
                 .then(response => {
-                    // Réinitialisez les données du formulaire et fermez la fenêtre modale
-                    this.promotionFormData = {
-                        datedebut: '',
-                        datefin: '',
-                        pourcentage: '',
-                    };
+                    this.resetPromotionForm();
                     this.isPromotionModalOpen = false;
+                    alert ('La promotion fut ajoutée avec succès !')
                     console.log('Promotion ajoutée avec succès:', response.data);
                 })
                 .catch(error => {
@@ -196,8 +169,7 @@ export default {
                 });
         },
         addProduit() {
-            axios
-                .post('https://bastien-353a308d211c.herokuapp.com/produit', this.newProduit)
+            axios.post('https://bastien-353a308d211c.herokuapp.com/produit', this.newProduit)
                 .then(response => {
                     this.newProduit = {
                         description: '',
@@ -205,6 +177,7 @@ export default {
                         image: '',
                         categorie_id: '',
                     };
+                    alert ('Produit ajouté avec succès !')
                     console.log('Produit ajouté avec succès:', response.data);
                 })
                 .catch(error => {
@@ -220,15 +193,11 @@ export default {
                     console.error('Erreur lors du chargement des catégories :', error);
                 });
         },
-
         loadProduits() {
             axios.get('https://bastien-353a308d211c.herokuapp.com/produit')
                 .then(response => {
                     this.loading = false;
                     this.produits = response.data;
-                    const expirationTime = Date.now() + 10 * 60 * 1000;
-                    localStorage.setItem('cachedproduits', JSON.stringify(response.data));
-                    localStorage.setItem('cacheExpiration', expirationTime.toString());
                 })
                 .catch(error => {
                     console.error('Erreur lors du chargement des produits :', error);
@@ -237,16 +206,43 @@ export default {
         handleFileChange(event) {
             const selectedFile = event.target.files[0];
             if (selectedFile) {
-                // Lisez le fichier sélectionné en tant que Data URL (base64)
                 const reader = new FileReader();
                 reader.onload = () => {
-                    this.newProduit.image = reader.result; // Stockez l'image en base64 dans votre modèle
-                    this.selectedImage = reader.result; // Affichez l'image sélectionnée
+                    this.newProduit.image = reader.result;
+                    this.selectedImage = reader.result;
                 };
                 reader.readAsDataURL(selectedFile);
             }
         },
+        getPromotionStatus(produitId, status) {
+            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+            if (promotion) {
+                const currentDate = new Date();
+                const startDate = new Date(promotion.datedebut);
+                const endDate = new Date(promotion.datefin);
 
+                if (status === 'future') {
+                    return currentDate < startDate;
+                } else if (status === 'active') {
+                    return currentDate >= startDate && currentDate <= endDate;
+                }
+            }
+            return false;
+        },
+        getPromotionDate(produitId, dateField) {
+            const promotion = this.promotions.find(promotion => promotion.produit_id === produitId);
+            if (promotion) {
+                return promotion[dateField];
+            }
+            return 'Pas de promotion';
+        },
+        resetPromotionForm() {
+            this.promotionFormData = {
+                datedebut: '',
+                datefin: '',
+                pourcentage: '',
+            };
+        },
     },
     mounted() {
         this.loadCategories();
@@ -259,18 +255,11 @@ export default {
             .catch(error => {
                 console.error('Error:', error);
             });
-        axios.get('https://bastien-353a308d211c.herokuapp.com/produit')
-            .then(response => {
-                this.loading = false;
-                this.produits = response.data;
+        this.loadProduits();
+    },
+};
+</script>
 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-}
-</script> 
 
 <style>
 @media only screen and (min-width: 767px) {
