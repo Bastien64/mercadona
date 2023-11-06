@@ -9,7 +9,7 @@
         <div class="collapse " id="produit">
             <div class="card card-body row row-cols-1 row-cols-md-2 g-4 ">
                 <div v-for="produit in produits">
-                    <div class="card " >
+                    <div class="card ">
                         <img :src="produit.image" class="card-img-top" alt="..." style="width: 30%; height: auto;">
                         <div class="card-body ">
                             <h5 class="card-title" fs-3>{{ produit.description }}</h5>
@@ -25,10 +25,11 @@
                             <button @click="openPromotionModal(produit)">Ajouter une promotion</button>
                             <!-- Afficher les dates de promotion si elles correspondent à la date actuelle -->
                             <div v-if="hasDiscount(produit.id)">
-                                <p v-if="isFuturePromotion(produit.id)" style="color: green; font-size: larger; font-weight: bold;">FUTURE PROMOTION :</p>
-                <p>Début de la promotion : {{ getPromotionStartDate(produit.id) }}</p>
-                <p>Fin de la promotion : {{ getPromotionEndDate(produit.id) }}</p>
-              </div>
+                                <p v-if="isFuturePromotion(produit.id)"
+                                    style="color: green; font-size: larger; font-weight: bold;">FUTURE PROMOTION :</p>
+                                <p>Début de la promotion : {{ getPromotionStartDate(produit.id) }}</p>
+                                <p>Fin de la promotion : {{ getPromotionEndDate(produit.id) }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,8 +162,9 @@ export default {
                 .then(response => {
                     this.resetPromotionForm();
                     this.isPromotionModalOpen = false;
-                    alert ('La promotion fut ajoutée avec succès !')
+                    alert('La promotion fut ajoutée avec succès !')
                     console.log('Promotion ajoutée avec succès:', response.data);
+                    this.loadPromotions();
                 })
                 .catch(error => {
                     console.error('Erreur lors de l\'ajout de la promotion :', error);
@@ -171,13 +173,15 @@ export default {
         addProduit() {
             axios.post('https://bastien-353a308d211c.herokuapp.com/produit', this.newProduit)
                 .then(response => {
+                    this.produits.push(response.data);
                     this.newProduit = {
                         description: '',
                         price: '',
                         image: '',
                         categorie_id: '',
                     };
-                    alert ('Produit ajouté avec succès !')
+                    this.loadProduits();
+                    alert('Produit ajouté avec succès !')
                     console.log('Produit ajouté avec succès:', response.data);
                 })
                 .catch(error => {
@@ -191,6 +195,16 @@ export default {
                 })
                 .catch(error => {
                     console.error('Erreur lors du chargement des catégories :', error);
+                });
+        },
+        loadPromotions() {
+            axios.get('https://bastien-353a308d211c.herokuapp.com/promotion')
+                .then(response => {
+                    this.promotions = response.data;
+                    console.log('Promotions:', this.promotions);
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des promotions :', error);
                 });
         },
         loadProduits() {
@@ -256,6 +270,7 @@ export default {
                 console.error('Error:', error);
             });
         this.loadProduits();
+        this.loadPromotions(); 
     },
 };
 </script>
