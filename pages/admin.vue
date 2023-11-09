@@ -25,11 +25,11 @@ export default {
     async login() {
       try {
         const response = await axios.post('https://bastien-353a308d211c.herokuapp.com/admin', {
-          login: this.username, // Utilisez this.username ici
+          login: this.username, 
           password: this.password
         });
 
-        // Stockez le jeton JWT ou d'autres informations d'authentification dans le local storage
+
         localStorage.setItem("Admin", this.username);
         console.log (localStorage.getItem("Admin"));
         this.$router.push({ name: "protected" });
@@ -40,7 +40,7 @@ export default {
   },
   beforeMount() {
     this.loading = true;
-    axios.get('https://bastien-353a308d211c.herokuapp.com/admin/get?login=' + this.username) // Utilisez this.username ici
+    axios.get('https://bastien-353a308d211c.herokuapp.com/admin/get?login=' + this.username)
       .then(response => {
         this.loading = false;
         this.admin = response.data[0];
