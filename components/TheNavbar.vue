@@ -21,7 +21,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link fw-bold h5" style="color:#175c27; text-decoration: none:  !important;" @click="closeNav"
-              href="https://www.studioimagein.com/contact/">Contact</a>
+              href="https://bastien.sitetest.best">Contact</a>
           </li>
         </ul>
       </div>
