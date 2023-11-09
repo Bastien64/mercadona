@@ -23,7 +23,7 @@
                                 {{ produit.price }} €
                             </p>
                             <button @click="openPromotionModal(produit)">Ajouter une promotion</button>
-                            <!-- Afficher les dates de promotion si elles correspondent à la date actuelle -->
+
                             <div v-if="hasDiscount(produit.id)">
                                 <p v-if="isFuturePromotion(produit.id)"
                                     style="color: green; font-size: larger; font-weight: bold;">FUTURE PROMOTION :</p>
