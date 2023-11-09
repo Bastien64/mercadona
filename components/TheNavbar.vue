@@ -21,7 +21,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link fw-bold h5" style="color:#175c27; text-decoration: none:  !important;" @click="closeNav"
-              href="https://bastien.sitetest.best">Contact</a>
+              href="https://www.fiverr.com/bastienville713">Contact</a>
           </li>
         </ul>
       </div>
